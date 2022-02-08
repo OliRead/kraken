@@ -18,6 +18,14 @@ type InstrumentationClient struct {
 	inner Client
 }
 
+// NewInstrumentationClient helper function for creating a new instrumenation
+// client to add prometheus metrics
+func NewInstrumentationClient(inner Client) InstrumentationClient {
+	return InstrumentationClient{
+		inner: inner,
+	}
+}
+
 // Time handles prometheus metrics for client Time function
 func (c *InstrumentationClient) Time(ctx context.Context) (Time, error) {
 	timer := prometheus.NewTimer(
